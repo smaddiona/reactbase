@@ -4,17 +4,15 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import { Dialog, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  FolderIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, FolderIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import { GoDatabase } from "react-icons/go";
 import { AiOutlineLineChart } from "react-icons/ai";
 import { RiToolsLine } from "react-icons/ri";
 import { useGlobalRefresh } from "../redux";
 import SideBarCollections from "../components/lists/SideBarCollections";
+import {FaUserShield} from "react-icons/fa";
+import {AiOutlineLogout} from "react-icons/ai";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -26,9 +24,30 @@ function AuthLayout() {
   const [globalRefresh, setGlobalRefresh] = useGlobalRefresh();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [navigation, setNavigation] = useState([
-    { name: "Collections", href: "/admin/collections", icon: GoDatabase, current: true },
-    { name: "Logs", href: "/admin/logs", icon: AiOutlineLineChart, current: false },
-    { name: "Settings", href: "/admin/settings", icon: RiToolsLine, current: false },
+    {
+      name: "Collections",
+      href: "/admin/collections",
+      icon: GoDatabase,
+      current: true,
+    },
+    {
+      name: "Logs",
+      href: "/admin/logs",
+      icon: AiOutlineLineChart,
+      current: false,
+    },
+    {
+      name: "Settings",
+      href: "/admin/settings",
+      icon: RiToolsLine,
+      current: false,
+    },
+    {
+      name: "Admins",
+      href: "/admin/manage",
+      icon: FaUserShield,
+      current: false,
+    },
   ]);
 
   useEffect(() => {
@@ -41,8 +60,6 @@ function AuthLayout() {
       setGlobalRefresh(!globalRefresh);
     }, 30000);
   }, []);
-
-
 
   return (
     <Fragment>
@@ -113,8 +130,8 @@ function AuthLayout() {
                       <ul role="list" className="-mx-2 flex-1 space-y-1">
                         {navigation.map((item) => (
                           <li key={item.name}>
-                            <a
-                              href={item.href}
+                            <Link
+                              to={item.href}
                               className={classNames(
                                 item.current
                                   ? "bg-zinc-800 text-white"
@@ -127,7 +144,7 @@ function AuthLayout() {
                                 aria-hidden="true"
                               />
                               {item.name}
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -169,6 +186,26 @@ function AuthLayout() {
                   </Link>
                 </li>
               ))}
+                <li key={"logout"}>
+                  <button
+                    onClick={() => {
+                      PBService.logout();
+                      navigate("/login");
+                    }}
+                    className={classNames(
+                      false
+                        ? "text-white border-2 border-white"
+                        : "text-red-500 hover:text-red-400 hover:bg-zinc-800",
+                      "group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold"
+                    )}
+                  >
+                    <AiOutlineLogout
+                      className="h-6 w-6 shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span className="sr-only">Logout</span>
+                  </button>
+                </li>
             </ul>
           </nav>
         </div>
@@ -195,9 +232,13 @@ function AuthLayout() {
           </a>
         </div>
 
-        <main className="lg:pl-20">
-          <div className={`${location.pathname === "/admin/collections" ? "xl:pl-56" : ""}`}>
-            <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
+        <main className="lg:pl-24">
+          <div
+            className={`${
+              location.pathname === "/admin/collections" ? "xl:pl-48" : ""
+            }`}
+          >
+            <div className="py-10">
               <Outlet />
             </div>
           </div>
@@ -207,7 +248,7 @@ function AuthLayout() {
           <aside className="fixed inset-y-0 left-20 hidden w-56 overflow-y-auto border-r border-zinc-800 xl:block">
             <SideBarCollections />
           </aside>
-        )}                
+        )}
       </div>
     </Fragment>
   );

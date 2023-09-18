@@ -9,6 +9,7 @@ import Installer from "./pages/auth/Installer";
 import Collections from "./pages/admin/Collections";
 import Settings from "./pages/admin/Settings";
 import Logs from "./pages/admin/Logs";
+import Manage from "./pages/admin/Manage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/admin" element={<Navigate to={"/admin/dashboard"} />} />
           <Route path="/admin/collections" element={<Collections />} />
           <Route path="/admin/logs" element={<Logs />} />
+          <Route path="/admin/manage" element={<Manage />} />
           <Route path="/admin/settings" element={<Settings />} />
         </Route>
         <Route path="*" element={<Navigate to={"/login"} />} />
