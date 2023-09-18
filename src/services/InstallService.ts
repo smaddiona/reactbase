@@ -8,7 +8,7 @@ const InstallService = {
     },
 
     install(data: any) {
-        axios.post(`${ConfigUtil.getUrl()}/api/admins`, data)
+        return axios.post(`${ConfigUtil.getUrl()}/api/admins`, data)
     }
 }
 

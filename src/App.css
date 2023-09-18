@@ -1,7 +1,7 @@
 /* when dark html has 181818 bg */
 @media (prefers-color-scheme: dark) {
   html {
-    background-color: #09090b;
+    background-color: #000000;
   }
 }
 
