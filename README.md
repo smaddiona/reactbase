@@ -22,6 +22,10 @@ I dont really know how to setup the contribution process right now, ill keep you
 
 [Click here](https://reactbase.mddntwrk.com)
 
+The config variables are stored in localStorage, in the key called "pb_config" <br/>
+At the current state theres no UI way to change that variable, <br/>
+so if you want to connect to another instance of pocketbase you need to change it manually <br />
+Just open the dev tools -> Application -> Local Storage (sidebar) -> https://reactbase.mddntwrk.com -> pb_config 
 ### Conclusion
 
 Thanks to [Gani Georgiev](https://github.com/ganigeorgiev) that created this amazing tool, [Pocketbase](https://github.com/pocketbase/pocketbase) 
