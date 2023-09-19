@@ -9,8 +9,19 @@ const CollectionService = {
         return await PBService.getPB().collections.getOne(id, {$autoCancel: false});
     },
 
-    getCollectionData: async (id: string) => {
-        return await PBService.getPB().collection(id).getList(1, 200, {sort: '-created', $autoCancel: false});
+    getCollectionData: async (id: string, field: string, direction: string, searchTerm: string) => {
+        let sortBuilder = '';
+        
+        if(direction === "desc") {
+            sortBuilder = '-';
+            sortBuilder += field;
+        }
+
+        if(direction === "asc") {
+            sortBuilder = field;
+        }
+
+        return await PBService.getPB().collection(id).getList(1, 200, {sort: sortBuilder, filter: searchTerm, $autoCancel: false});
     }
 };
 

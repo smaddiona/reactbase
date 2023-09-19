@@ -1,28 +1,26 @@
-import React, { Fragment, useCallback } from "react";
-import PrimaryButton from "../buttons/PrimaryButton";
-import { GoPlus } from "react-icons/go";
+import React, { useCallback } from "react";
 import { MdKey } from "react-icons/md";
 import { RxText } from "react-icons/rx";
 import {
   AiOutlineFile,
   AiOutlineCalendar,
-  AiOutlineReload,
 } from "react-icons/ai";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import { BsArrowRightShort, BsCodeSlash } from "react-icons/bs";
+import { BsArrowRightShort } from "react-icons/bs";
 import NormalBadge from "../badges/NormalBadge";
 import { useGlobalRefresh } from "../../redux";
-import OriginalButton from "../buttons/OriginalButton";
-import OriginalInvertedButton from "../buttons/OriginalInvertedButton";
 
 interface Props {
   schema: any;
   infos: any;
   data: any;
+  filter: any;
+  changeFilter?: (value: any) => void;
 }
 
 function CollectionDataTable({ schema, infos, data }: Props) {
   const [globalRefresh, setGlobalRefresh] = useGlobalRefresh();
+  
 
   const renderHeadCell = useCallback((field: any, type: any) => {
     switch (type) {
@@ -101,35 +99,6 @@ function CollectionDataTable({ schema, infos, data }: Props) {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold leading-6 text-black dark:text-white inline-flex gap-2">
-            {infos.name}
-            {globalRefresh && (
-              <span>
-                <AiOutlineReload className="w-5 h-5 animate-spin" />
-              </span>
-            )}
-          </h1>
-        </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 flex flex-row">
-          <OriginalInvertedButton
-            label="Api preview"
-            iconPosition="start"
-            IconComponent={BsCodeSlash}
-            short={true}
-            onClick={() => {}}
-          />
-          <div className="mx-1"></div>
-          <OriginalButton
-            label="Add record"
-            iconPosition="start"
-            IconComponent={GoPlus}
-            short={true}
-            onClick={() => {}}
-          />
-        </div>
-      </div>
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">

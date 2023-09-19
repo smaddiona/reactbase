@@ -11,8 +11,8 @@ import { AiOutlineLineChart } from "react-icons/ai";
 import { RiToolsLine } from "react-icons/ri";
 import { useGlobalRefresh } from "../redux";
 import SideBarCollections from "../components/lists/SideBarCollections";
-import {FaUserShield} from "react-icons/fa";
-import {AiOutlineLogout} from "react-icons/ai";
+import { FaUserShield } from "react-icons/fa";
+import { AiOutlineLogout } from "react-icons/ai";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -60,6 +60,15 @@ function AuthLayout() {
       setGlobalRefresh(!globalRefresh);
     }, 30000);
   }, []);
+
+  useEffect(() => {
+    setNavigation(
+      navigation.map((item) => ({
+        ...item,
+        current: item.href === location.pathname,
+      }))
+    );
+  }, [location]);
 
   return (
     <Fragment>
@@ -186,26 +195,26 @@ function AuthLayout() {
                   </Link>
                 </li>
               ))}
-                <li key={"logout"}>
-                  <button
-                    onClick={() => {
-                      PBService.logout();
-                      navigate("/login");
-                    }}
-                    className={classNames(
-                      false
-                        ? "text-white border-2 border-white"
-                        : "text-red-500 hover:text-red-400 hover:bg-zinc-800",
-                      "group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold"
-                    )}
-                  >
-                    <AiOutlineLogout
-                      className="h-6 w-6 shrink-0"
-                      aria-hidden="true"
-                    />
-                    <span className="sr-only">Logout</span>
-                  </button>
-                </li>
+              <li key={"logout"}>
+                <button
+                  onClick={() => {
+                    PBService.logout();
+                    navigate("/login");
+                  }}
+                  className={classNames(
+                    false
+                      ? "text-white border-2 border-white"
+                      : "text-red-500 hover:text-red-400 hover:bg-zinc-800",
+                    "group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold"
+                  )}
+                >
+                  <AiOutlineLogout
+                    className="h-6 w-6 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span className="sr-only">Logout</span>
+                </button>
+              </li>
             </ul>
           </nav>
         </div>
@@ -236,7 +245,11 @@ function AuthLayout() {
           <div
             className={`${
               location.pathname === "/admin/collections" ? "xl:pl-48" : ""
-            }`}
+            }
+            
+            ${location.pathname === "/admin/settings" ? "xl:pl-56" : ""}
+            
+            `}
           >
             <div className="py-10">
               <Outlet />
