@@ -1,13 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import { registerSW } from 'virtual:pwa-register'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
+import { registerSW } from "virtual:pwa-register";
 
-registerSW({ immediate: true })
+registerSW({
+  immediate: true,
+  onRegistered(r) {
+    r &&
+      setInterval(() => {
+        r.update();
+      }, 5000);
+  },
+});
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
