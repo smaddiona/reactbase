@@ -6,6 +6,7 @@ import TextInput from "../../components/inputs/TextInput";
 import PasswordInput from "../../components/inputs/PasswordInput";
 import toast from "react-hot-toast";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
+import Validators from "../../utils/Validators";
 
 function Installer() {
   const navigate = useNavigate();

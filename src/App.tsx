@@ -33,11 +33,13 @@ function App() {
 
         <Route path="/admin" element={<AuthLayout />}>
           <Route path="/admin" element={<Navigate to={"/admin/dashboard"} />} />
+          <Route path="/admin/*" element={<Navigate to={"/admin/dashboard"} />} />
           <Route path="/admin/collections" element={<Collections />} />
           <Route path="/admin/logs" element={<Logs />} />
           <Route path="/admin/manage" element={<Manage />} />
           <Route path="/admin/settings" element={<Settings />}>
             <Route path="/admin/settings" element={<Navigate to={"/admin/settings/app"} />} />
+            <Route path="/admin/settings/*" element={<Navigate to={"/admin/settings/app"} />} />
             {/*System section*/}
             <Route path="/admin/settings/app" element={<ApplicationSettings />} />
             <Route path="/admin/settings/mail" element={<MailSettings />} />

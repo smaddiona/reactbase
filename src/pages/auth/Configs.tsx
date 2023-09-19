@@ -34,7 +34,7 @@ function Configs() {
 
 
   return (
-    <div className="w-full h-[100dvh] flex flex-col justify-center items-center">
+    <div className="w-full flex flex-col justify-center items-center">
       <div className="max-w-xl w-full flex flex-col justify-center items-center rounded-xl p-4 bg-zinc-100 dark:bg-zinc-900 border-zinc-500">
         <h1 className="font-bold tracking-tight leading-6 text-black dark:text-white text-3xl">Configs</h1>
         {errored.status && <p className="text-red-500 mt-2">{errored.message}</p>}

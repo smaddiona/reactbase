@@ -1,14 +1,20 @@
 const ConfigUtil = {
     get: () => {
-        return JSON.parse(localStorage.getItem('pb_config')!) || {};
+        let confs = localStorage.getItem('pb_config');
+
+        if(!confs) {
+            ConfigUtil.set({ url: ""});
+            return JSON.stringify({url: ""});
+        }
+        return JSON.parse(localStorage.getItem('pb_config')!);
     },
 
     getToken: () => {
-        return JSON.parse(localStorage.getItem('pb_config')!).token || "";
+        return ConfigUtil.get().token;
     },
 
     getUrl: () => {
-        return JSON.parse(localStorage.getItem('pb_config')!).url || "";
+        return ConfigUtil.get().url;
     },
 
     set: (config: any) => {
