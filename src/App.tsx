@@ -24,20 +24,20 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route element={<Layout />}>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/forgot" element={<Forgot />}></Route>
           <Route path="/installer" element={<Installer />}></Route>
         </Route>
 
-        <Route path="/admin" element={<AuthLayout />}>
-          <Route path="/admin" element={<Navigate to={"/admin/dashboard"} />} />
-          <Route path="/admin/*" element={<Navigate to={"/admin/dashboard"} />} />
+        <Route element={<AuthLayout />}>
+          <Route path="/admin" element={<Navigate to={"/admin/collections"} />} />
+          <Route path="/admin/*" element={<Navigate to={"/admin/collections"} />} />
           <Route path="/admin/collections" element={<Collections />} />
           <Route path="/admin/logs" element={<Logs />} />
           <Route path="/admin/manage" element={<Manage />} />
-          <Route path="/admin/settings" element={<Settings />}>
+          <Route element={<Settings />}>
             <Route path="/admin/settings" element={<Navigate to={"/admin/settings/app"} />} />
             <Route path="/admin/settings/*" element={<Navigate to={"/admin/settings/app"} />} />
             {/*System section*/}
